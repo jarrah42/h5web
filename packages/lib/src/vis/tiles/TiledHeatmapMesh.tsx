@@ -1,6 +1,6 @@
 import { clamp, range } from 'lodash';
 import { useRef } from 'react';
-import type { Object3D } from 'three';
+import type { Group } from 'three';
 
 import { getInterpolator } from '../heatmap/utils';
 import { useCameraState } from '../hooks';
@@ -37,7 +37,7 @@ function TiledHeatmapMesh(props: Props) {
   const { canvasSize, visSize } = useVisCanvasContext();
   const meshSize = size ?? visSize;
 
-  const groupRef = useRef<Object3D>(null);
+  const groupRef = useRef<Group>(null);
 
   const ndcToLocalMatrix = useCameraState(
     (camera) => getNdcToObject3DMatrix(camera, groupRef),
