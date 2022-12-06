@@ -4,7 +4,7 @@ import { Vector2, Vector3 } from 'three';
 
 import type { Size } from '../vis/models';
 import { getWorldFOV } from '../vis/utils';
-import type { ModifierKey } from './models';
+import type { ModifierKey, Selection } from './models';
 
 export function boundWorldPointToFOV(
   unboundedPoint: Vector3,
@@ -96,4 +96,21 @@ export function getModifierKeyArray(
   keys: ModifierKey | ModifierKey[] | undefined = []
 ): ModifierKey[] {
   return Array.isArray(keys) ? keys : [keys];
+}
+
+export function isSelectionValid(
+  selection: Selection | undefined,
+  threshold: number
+): boolean {
+  if (!selection) {
+    return false;
+  }
+
+  const { htmlStartPoint, htmlEndPoint } = selection;
+  const { x: width, y: height } = new Box2(
+    htmlStartPoint,
+    htmlEndPoint
+  ).getSize(new Vector2());
+
+  return width >= threshold && height >= threshold;
 }
