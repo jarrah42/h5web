@@ -52,6 +52,7 @@ function Explorer(props: Props) {
           <FiRefreshCw
             className={styles.spinner}
             aria-label="Loading root metadata..."
+            data-testid="LoadingExplorerRoot"
           />
         }
       >
